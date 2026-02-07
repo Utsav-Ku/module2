@@ -3,6 +3,7 @@ import Doctors from './components/DoctorsPage';
 import Login from './components/Login';
 import BookAppointment from './components/BookAppointment';
 import { Route, Routes } from 'react-router-dom';
+import Register from './components/Register';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Doctors />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/register' element={<Register />}/>
         <Route path="/book/:doctorId" element={<BookAppointment />} />
       </Routes>
     </>

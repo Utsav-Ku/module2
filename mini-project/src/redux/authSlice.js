@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import { loginApi } from "../services/authService";
+import { loginApi, registerApi } from "../services/authService";
+import axios from "axios";
 
 export const login = createAsyncThunk(
     'auth/login',
@@ -10,6 +11,33 @@ export const login = createAsyncThunk(
         }
 
         return user;
+    }
+)
+
+export const register = createAsyncThunk(
+    'auth/register',
+    async ({name, emailId, password}, {rejectWithValue}) => {
+        try{
+            //Check if user already exist
+            const checkRes = await axios.get(`http://localhost:3000/users?emial=${emailId}`)
+
+            if(checkRes.data.length > 0){
+                return rejectWithValue("Email already exists. Please login instead.")
+            }
+
+            const newUser = {
+                name,
+                email: emailId,
+                password,
+                role: "patient"
+            };
+
+            const createdUser = await registerApi(newUser);
+            return createdUser;
+        } 
+        catch(err){
+            return rejectWithValue(`Registration failed${err.message}. Try again.`);
+        }
     }
 )
 
@@ -32,6 +60,11 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+        //Login
+        .addCase(login.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
         .addCase(login.fulfilled, (state, action) => {
             state.isLoggedIn = true;
             state.user = action.payload;
@@ -42,6 +75,22 @@ const authSlice = createSlice({
             state.user = null;
             state.error = action.payload;
         })
+        //Register
+        .addCase(register.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(register.fulfilled, (state, action) => {
+            state.loading = false;
+            state.isLoggedIn = true;          
+            state.user = action.payload;    
+            state.error = null;
+            localStorage.setItem("user", JSON.stringify(action.payload)); 
+        })
+        .addCase(register.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
     }
 })
 

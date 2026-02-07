@@ -37,9 +37,9 @@ function BookAppointment(){
         <form onSubmit={handleSubmit}>
             <h2>Book Appointment</h2>
 
-            <input type="date" onChange={(e) => setForm({...form, date: e.target.value })} />
-            <input type="time" onChange={(e) => setForm({...form, startTime: e.target.value })} />
-            <input type="time" onChange={(e) => setForm({...form, endTime: e.target.value })} />
+            <input type="date" onChange={(e) => setForm({...form, date: e.target.value })} required />
+            <input type="time" onChange={(e) => setForm({...form, startTime: e.target.value })} required />
+            <input type="time" onChange={(e) => setForm({...form, endTime: e.target.value })} required />
 
             <button type="submit">Confirm Booking</button>
         </form>

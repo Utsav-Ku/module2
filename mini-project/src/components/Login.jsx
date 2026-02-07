@@ -31,8 +31,8 @@ function Login(){
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
             <button type="submit">Login</button>
 
-            <p style={{ marginTop: '10px' }}>
-                Don’t have an account? <span style={{ color: 'blue', cursor: 'pointer' }}>Create an acount</span>
+            <p style={{ marginTop: '10px' }} >
+                Don’t have an account? <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => navigate('/register')}>Create an acount</span>
             </p>
         </form>
     )
