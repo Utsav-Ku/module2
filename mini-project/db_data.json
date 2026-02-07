@@ -86,7 +86,7 @@
       "startTime": "15:41",
       "endTime": "16:43",
       "doctorId": "d1",
-      "status": "pending",
+      "status": "Booked",
       "id": "k-TPp1S"
     },
     {
@@ -94,8 +94,17 @@
       "startTime": "",
       "endTime": "",
       "doctorId": "d1",
-      "status": "pending",
+      "status": "Booked",
       "id": "StCbudA"
+    },
+    {
+      "date": "2026-02-18",
+      "startTime": "17:32",
+      "endTime": "21:28",
+      "doctorId": "d2",
+      "patientId": 7,
+      "status": "Booked",
+      "id": "-5Aw_QM"
     }
   ]
 }

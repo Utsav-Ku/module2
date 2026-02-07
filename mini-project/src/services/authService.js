@@ -5,7 +5,7 @@ export const loginApi = async(email, password) => {
         `http://localhost:3000/users?email=${email}&password=${password}`
     )
 
-    return response.data;
+    return response.data[0];
 };
 
 export const registerApi = async(userData) => {

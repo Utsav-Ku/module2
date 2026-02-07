@@ -19,7 +19,7 @@ export const register = createAsyncThunk(
     async ({name, emailId, password}, {rejectWithValue}) => {
         try{
             //Check if user already exist
-            const checkRes = await axios.get(`http://localhost:3000/users?emial=${emailId}`)
+            const checkRes = await axios.get(`http://localhost:3000/users?email=${emailId}`)
 
             if(checkRes.data.length > 0){
                 return rejectWithValue("Email already exists. Please login instead.")
@@ -37,6 +37,23 @@ export const register = createAsyncThunk(
         } 
         catch(err){
             return rejectWithValue(`Registration failed${err.message}. Try again.`);
+        }
+    }
+)
+
+export const updateUserDetails = createAsyncThunk(
+    "appointments/updatePatientDetails",
+    async ({ id, data }, {rejectWithValue}) => {
+        try{
+            const res = await axios.patch(
+                `http://localhost:3000/users/${id}`,
+                data
+            )
+
+            return res.data
+        }
+        catch(err){
+            rejectWithValue(`Failed to update profile${err}`);
         }
     }
 )
@@ -90,7 +107,21 @@ const authSlice = createSlice({
         .addCase(register.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        });
+        })
+        //update details
+        .addCase(updateUserDetails.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(updateUserDetails.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload;             
+            localStorage.setItem("user", JSON.stringify(action.payload)); 
+        })
+        .addCase(updateUserDetails.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        }) 
     }
 })
 

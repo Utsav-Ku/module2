@@ -36,6 +36,7 @@ function Doctors(){
     return (
         <div>
             <h3>Available Doctor</h3>
+            <button onClick={() => navigate('/dashboard')}>Dashboard</button>
             {doctors.map((doctor) => (
                 <div>
                     <h3>{doctor.name}</h3>

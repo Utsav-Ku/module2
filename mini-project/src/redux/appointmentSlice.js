@@ -42,10 +42,57 @@ export const addAppointment = createAsyncThunk(
 
         const response = await axios.post('http://localhost:3000/appointments', {
             ...newAppt,
-            status: "pending",
+            status: "Booked",
         });
 
         return response.data;
+    }
+)
+
+export const fetchAppointmentsByDoctor = createAsyncThunk(
+    'appointments/fetchAppointmentsByDoctor',
+    async (doctorId, { rejectWithValue }) => {
+        try{
+            const res = await axios.get(`http://localhost:3000/appointments?doctorId=${doctorId}`);
+            return res.data;
+        }
+        catch(err){
+            return rejectWithValue(`Failed to fetch data${err}`)
+        }
+    }
+)
+
+export const confirmAppointment = createAsyncThunk(
+    'appointments/confirmAppointment',
+    async (appointmentId, {rejectWithValue}) => {
+        try{
+            const res = await axios.patch(
+                `http://localhost:3000/appointments/${appointmentId}`,
+                { status: "Confirmed" }
+            )
+
+            return  res.data;
+        }
+        catch(err){
+            return rejectWithValue(`Failed to update status${err}`);
+        }
+    }
+)
+
+export const cancelAppointment = createAsyncThunk(
+    'appointments/cancelAppointment',
+    async (appointmentId, {rejectWithValue}) => {
+        try{
+            const res = await axios.patch(
+                `http://localhost:3000/appointments/${appointmentId}`,
+                { status: "Cancelled" }
+            )
+
+            return  res.data;
+        }
+        catch(err){
+            return rejectWithValue(`Failed to update status${err}`);
+        }
     }
 )
 
@@ -93,6 +140,47 @@ const appointmentSlice = createSlice({
         .addCase(addAppointment.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        })
+        //cancel appointment
+        .addCase(cancelAppointment.pending, (state) => {
+            state.loading = true
+            state.error = null;
+        }) 
+        .addCase(cancelAppointment.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = null;
+
+            const index = state.appointments.findIndex(
+                (appointment) => appointment.id === action.payload.id
+            );
+
+            if(index !== -1){
+                state.appointments[index] = action.payload
+            }
+        })
+        .addCase(cancelAppointment.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        // fetch by doctor
+        .addCase(fetchAppointmentsByDoctor.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(fetchAppointmentsByDoctor.fulfilled, (state, action) => {
+            state.loading = false;
+            state.appointments = action.payload;
+        })
+        .addCase(fetchAppointmentsByDoctor.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        // confirm
+        .addCase(confirmAppointment.fulfilled, (state, action) => {
+            const index = state.appointments.findIndex(a => a.id === action.payload.id);
+            if (index !== -1) {
+                state.appointments[index] = action.payload;
+            }
         })
     }
 })
