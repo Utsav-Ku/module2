@@ -1,0 +1,21 @@
+{
+  "doctors": [
+    { "id": "d1", "name": "Dr. Smith", "specialty": "Cardiology" },
+    { "id": "d2", "name": "Dr. Doe", "specialty": "Dermatology" }
+  ],
+  "patients": [
+    { "id": "p1", "name": "John Doe", "email": "john@example.com" },
+    { "id": "p2", "name": "Jane Roe", "email": "jane@example.com" }
+  ],
+  "appointments": [
+    {
+      "id": "1",
+      "doctorId": "d1",
+      "patientId": "p1",
+      "date": "2026-02-06",
+      "startTime": "10:00",
+      "endTime": "10:30",
+      "status": "Booked"
+    }
+  ]
+}
