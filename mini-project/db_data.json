@@ -1,11 +1,50 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "email": "patient@test.com",
+      "password": "123456",
+      "role": "patient",
+      "name": "Rahul"
+    },
+    {
+      "id": 2,
+      "email": "doctor@test.com",
+      "password": "123456",
+      "role": "doctor",
+      "name": "Dr. Sharma"
+    },
+    {
+      "id": 3,
+      "email": "admin@test.com",
+      "password": "123456",
+      "role": "admin",
+      "name": "Admin"
+    }
+  ],
   "doctors": [
-    { "id": "d1", "name": "Dr. Smith", "specialty": "Cardiology" },
-    { "id": "d2", "name": "Dr. Doe", "specialty": "Dermatology" }
+    {
+      "id": "d1",
+      "name": "Dr. Smith",
+      "specialty": "Cardiology"
+    },
+    {
+      "id": "d2",
+      "name": "Dr. Doe",
+      "specialty": "Dermatology"
+    }
   ],
   "patients": [
-    { "id": "p1", "name": "John Doe", "email": "john@example.com" },
-    { "id": "p2", "name": "Jane Roe", "email": "jane@example.com" }
+    {
+      "id": "p1",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": "p2",
+      "name": "Jane Roe",
+      "email": "jane@example.com"
+    }
   ],
   "appointments": [
     {
@@ -16,6 +55,14 @@
       "startTime": "10:00",
       "endTime": "10:30",
       "status": "Booked"
+    },
+    {
+      "date": "2026-02-17",
+      "startTime": "15:41",
+      "endTime": "16:43",
+      "doctorId": "d1",
+      "status": "pending",
+      "id": "k-TPp1S"
     }
   ]
 }

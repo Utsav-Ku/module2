@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios'
 
 export const fetchDoctors = createAsyncThunk(
-    'apt/fetchDoctors',
+    'appointments/fetchDoctors',
     async () => {
         const response = await axios.get('http://localhost:3000/doctors');
         console.log(response.data)

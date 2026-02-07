@@ -1,21 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Provider } from 'react-redux';
 import './App.css'
-import { appStore } from './redux/store'
-import Bank from './components/BankingComponent'
-import TodoList from './components/TodoList';
-import NotesComponent from './components/Notes';
+import Doctors from './components/DoctorsPage';
+import Login from './components/Login';
+import BookAppointment from './components/BookAppointment';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Provider store={appStore}>
-        <NotesComponent />
-      </Provider>
+      <Routes>
+        <Route path="/" element={<Doctors />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/book/:doctorId" element={<BookAppointment />} />
+      </Routes>
     </>
   )
 }
