@@ -20,6 +20,31 @@
       "password": "123456",
       "role": "admin",
       "name": "Admin"
+    },
+    {
+      "name": "",
+      "password": "Utsav123",
+      "role": "patient",
+      "id": 4
+    },
+    {
+      "name": "utsav",
+      "password": "Utsav123",
+      "role": "patient",
+      "id": 5
+    },
+    {
+      "name": "utsav",
+      "password": "Utsav123",
+      "role": "patient",
+      "id": 6
+    },
+    {
+      "name": "utsav",
+      "email": "patient@test.com",
+      "password": "Utsav123",
+      "role": "patient",
+      "id": 7
     }
   ],
   "doctors": [
@@ -63,6 +88,14 @@
       "doctorId": "d1",
       "status": "pending",
       "id": "k-TPp1S"
+    },
+    {
+      "date": "",
+      "startTime": "",
+      "endTime": "",
+      "doctorId": "d1",
+      "status": "pending",
+      "id": "StCbudA"
     }
   ]
 }
